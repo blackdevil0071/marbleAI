@@ -3,9 +3,8 @@
   display: flex;
   justify-content: flex-end;
 }
-
 button {
-  padding: 5px 30px;
+ padding: 5px 30px;
   font-size: 14px;
   color: #969393;
   cursor: pointer;
@@ -13,29 +12,14 @@ button {
   background-color: transparent;
 }
 
-button:hover {
-  background-color: #f0f0f0;
-}
-
-button.active {
-  border-bottom: 2px solid blue;
-}
-
-.date-selector-container {
-  display: flex;
-  flex-direction: row; /* Updated to column for mobile view */
-  align-items: flex-end; /* Adjusted alignment */
-  margin: 0px;
-}
-
 .custom-input {
-  width: 100%; /* Updated to 100% width for responsiveness */
-  max-width: 250px; /* Added max-width to limit width on larger screens */
+  width: 100%;
+  max-width: 250px;
   height: 30px;
   border: 2px solid #d1cdcd;
   border-radius: 4px;
   padding: 15px;
-  margin-top: 10px; /* Added margin for separation between date pickers and button */
+  margin-top: 10px;
   font-size: 14px;
   color: #969393;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -53,12 +37,5 @@ button.active {
   top: 40px;
   left: 0;
   width: 100%;
-  max-width: 250px; /* Added max-width to limit width on larger screens */
-}
-
-
-@media screen and (max-width: 600px) {
-  .date-selector-container {
-    align-items: flex-start; /* Adjusted alignment for mobile view */
-  }
+  max-width: 250px;
 }

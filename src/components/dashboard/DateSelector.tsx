@@ -3,38 +3,33 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TabView.css';
 
-// Specify the types for the DateSelectorProps
 type DateSelectorProps = {
   onDateRangeChange: (startDate: Date, endDate: Date) => void;
-  onUpdateButtonClick: () => void;
-};
 
-// Use React.FC with DateSelectorProps as the generic type
-const DateSelector: React.FC<DateSelectorProps> = ({ onDateRangeChange, onUpdateButtonClick }) => {
-  // Use Date | null as the type for state
+};
+// ... (other imports and code)
+
+const DateSelector: React.FC<DateSelectorProps> = ({
+  onDateRangeChange,
+}: DateSelectorProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  // Specify the types for handleDateChange function
-  const handleDateChange = (date: Date | null, isStart: boolean = false) => {
-    if (isStart) {
-      setStartDate(date);
-    } else {
-      setEndDate(date);
+  const handleDateChange = (start: Date | null, end: Date | null) => {
+    setStartDate(start);
+    setEndDate(end);
+
+    // Check if both start and end dates are not null before calling the callback
+    if (start && end) {
+      onDateRangeChange(start, end);
     }
   };
 
-  const handleUpdateButtonClick = () => {
-    console.log('Start Date:', startDate);
-    console.log('End Date:', endDate);
-    onUpdateButtonClick();
-    onDateRangeChange(startDate || new Date(), endDate || new Date());
-  };
   return (
     <div className="date-selector-container">
       <DatePicker
         selected={startDate}
-        onChange={(date: Date | null) => handleDateChange(date, true)}
+        onChange={(date: Date | null) => handleDateChange(date, endDate)}
         selectsStart
         startDate={startDate}
         endDate={endDate}
@@ -44,7 +39,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({ onDateRangeChange, onUpdate
       />
       <DatePicker
         selected={endDate}
-        onChange={(date: Date | null) => handleDateChange(date)}
+        onChange={(date: Date | null) => handleDateChange(startDate, date)}
         selectsEnd
         startDate={startDate}
         endDate={endDate}
@@ -54,7 +49,6 @@ const DateSelector: React.FC<DateSelectorProps> = ({ onDateRangeChange, onUpdate
         className="custom-input"
         calendarClassName="custom-calendar"
       />
-      <button onClick={handleUpdateButtonClick}>Update</button>
     </div>
   );
 };

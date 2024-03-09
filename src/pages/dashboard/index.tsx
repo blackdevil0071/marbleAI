@@ -1,10 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { CrudFilter, useList } from "@refinedev/core";
 import dayjs from "dayjs";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
 import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChart";
-import TabView from "../../components/dashboard/TabView";
+import { TabView } from "../../components/dashboard/TabView";
 import { RecentSales } from "../../components/dashboard/RecentSales";
 import { IChartDatum, TTab } from "../../interfaces";
 import "./index.css";
@@ -16,45 +16,14 @@ export const Dashboard: React.FC = () => {
 
   const handleTimeFrameChange = (newTimeFrame: "7days" | "14days") => {
     setSelectedTimeFrame(newTimeFrame);
-    updateDateRangeFilters(newTimeFrame, selectedStartDate, selectedEndDate);
+    console.warn("Button Clicked");
   };
 
   const handleDateRangeChange = (startDate: Date, endDate: Date) => {
     setSelectedStartDate(startDate);
     setSelectedEndDate(endDate);
-    updateDateRangeFilters(selectedTimeFrame, startDate, endDate);
   };
 
-  const updateDateRangeFilters = (
-    timeFrame: "7days" | "14days",
-    startDate?: Date | null,
-    endDate?: Date | null
-  ) => {
-    const days = timeFrame === "7days" ? 7 : 14;
-    const dailyRevenueFilters: CrudFilter[] = getDailyFilters(days, startDate, endDate);
-    const dailyOrdersFilters: CrudFilter[] = getDailyFilters(days, startDate, endDate);
-    const newCustomersFilters: CrudFilter[] = getDailyFilters(days, startDate, endDate);
-
-    // Fetch data using useList hook for different data sets
-    const { data: updatedDailyRevenue } = useList<IChartDatum>({
-      resource: "dailyRevenue",
-      filters: dailyRevenueFilters,
-    });
-
-    const { data: updatedDailyOrders } = useList<IChartDatum>({
-      resource: "dailyOrders",
-      filters: dailyOrdersFilters,
-    });
-
-    const { data: updatedNewCustomers } = useList<IChartDatum>({
-      resource: "newCustomers",
-      filters: newCustomersFilters,
-    });
-
-    // Process the updated data as needed
-  };
-
-  // Function to get daily filters based on selectedTimeFrame
   const getDailyFilters = (days: number, startDate?: Date | null, endDate?: Date | null): CrudFilter[] => [
     {
       field: "start",
@@ -68,23 +37,17 @@ export const Dashboard: React.FC = () => {
     },
   ];
 
-  // Fetch data using useList hook for different data sets
-  const { data: dailyRevenue } = useList<IChartDatum>({
-    resource: "dailyRevenue",
-    filters: getDailyFilters(selectedTimeFrame === "7days" ? 7 : 14, selectedStartDate, selectedEndDate),
-  });
+  const useDailyData = (resource: string) => {
+    return useList<IChartDatum>({
+      resource,
+      filters: getDailyFilters(selectedTimeFrame === "7days" ? 7 : 14, selectedStartDate, selectedEndDate),
+    });
+  };
 
-  const { data: dailyOrders } = useList<IChartDatum>({
-    resource: "dailyOrders",
-    filters: getDailyFilters(selectedTimeFrame === "7days" ? 7 : 14, selectedStartDate, selectedEndDate),
-  });
+  const { data: dailyRevenue } = useDailyData("dailyRevenue");
+  const { data: dailyOrders } = useDailyData("dailyOrders");
+  const { data: newCustomers } = useDailyData("newCustomers");
 
-  const { data: newCustomers } = useList<IChartDatum>({
-    resource: "newCustomers",
-    filters: getDailyFilters(selectedTimeFrame === "7days" ? 7 : 14, selectedStartDate, selectedEndDate),
-  });
-
-  // Function to memoize chart data
   const useMemoizedChartData = (data: any) => {
     return useMemo(() => {
       return data?.data?.data?.map((item: IChartDatum) => ({
@@ -98,12 +61,10 @@ export const Dashboard: React.FC = () => {
     }, [data]);
   };
 
-  // Memoized chart data for different data sets
   const memoizedRevenueData: IChartDatum[] = useMemoizedChartData(dailyRevenue);
   const memoizedOrdersData: IChartDatum[] = useMemoizedChartData(dailyOrders);
   const memoizedNewCustomerData: IChartDatum[] = useMemoizedChartData(newCustomers);
 
-  // Tabs configuration
   const tabs: TTab[] = [
     {
       id: 1,
@@ -151,11 +112,7 @@ export const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Stats
-        dailyRevenue={dailyRevenue}
-        dailyOrders={dailyOrders}
-        newCustomers={newCustomers}
-      />
+      <Stats {...{ dailyRevenue, dailyOrders, newCustomers }} />
       <TabView
         tabs={tabs}
         handleTimeFrameChange={handleTimeFrameChange}
