@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TabItem } from "./TabItem";
 import { TabPanel } from "./TabPanel";
 import { TTab } from "../../interfaces";
 import "./TabView.css";
 import DateSelector from "./DateSelector";
 
-const BUTTON_7_DAYS_TEXT = 'Mar 2, 2024 - Mar 9, 2024';
-const BUTTON_14_DAYS_TEXT = 'Feb 24, 2024 - Mar 9, 2024';
+const BUTTON_7_DAYS_TEXT = "Mar 2, 2024 - Mar 9, 2024";
+const BUTTON_14_DAYS_TEXT = "Feb 24, 2024 - Mar 9, 2024";
 
 type TTabViewProps = {
   tabs: TTab[];
@@ -23,6 +23,7 @@ export const TabView: React.FC<TTabViewProps> = ({
 }: TTabViewProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [dateSelectorKey, setDateSelectorKey] = useState(0);
+  const [disabledButtons, setDisabledButtons] = useState<"7days" | "14days" | null>(null);
 
   const calculateDateRange = (days: number): [Date, Date] => {
     const endDate = new Date();
@@ -35,9 +36,13 @@ export const TabView: React.FC<TTabViewProps> = ({
     const [startDate, endDate] = calculateDateRange(days);
     handleTimeFrameChange(timeFrame);
     onDateRangeChange(startDate, endDate);
-    // Update the key to force re-render DateSelector and clear its state
     setDateSelectorKey((prevKey) => prevKey + 1);
+    setDisabledButtons(timeFrame);
   };
+
+  useEffect(() => {
+    setDisabledButtons(null);
+  }, [selectedTimeFrame]);
 
   return (
     <div className={`mx-auto py-4 bg-slate-50 border rounded-lg drop-shadow-md`}>
@@ -67,15 +72,17 @@ export const TabView: React.FC<TTabViewProps> = ({
 
       <div className="button-container">
         <button
+          className={selectedTimeFrame === "7days" ? "active" : ""}
           onClick={() => handleButtonClick("7days", 7)}
-          disabled={selectedTimeFrame === "7days"}
+          disabled={disabledButtons === "7days"}
         >
           {BUTTON_7_DAYS_TEXT}
         </button>
 
         <button
+          className={selectedTimeFrame === "14days" ? "active" : ""}
           onClick={() => handleButtonClick("14days", 14)}
-          disabled={selectedTimeFrame === "14days"}
+          disabled={disabledButtons === "14days"}
         >
           {BUTTON_14_DAYS_TEXT}
         </button>

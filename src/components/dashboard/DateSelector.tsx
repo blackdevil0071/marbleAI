@@ -3,18 +3,17 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './TabView.css';
 
+const DATE_FORMAT = 'MMM dd, yyyy';
+
 type DateSelectorProps = {
   onDateRangeChange: (startDate: Date, endDate: Date) => void;
-
 };
-// ... (other imports and code)
 
-const DateSelector: React.FC<DateSelectorProps> = ({
-  onDateRangeChange,
-}: DateSelectorProps) => {
+const DateSelector: React.FC<DateSelectorProps> = ({ onDateRangeChange }: DateSelectorProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
+  // Handle changes to start and end dates
   const handleDateChange = (start: Date | null, end: Date | null) => {
     setStartDate(start);
     setEndDate(end);
@@ -34,8 +33,10 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         startDate={startDate}
         endDate={endDate}
         placeholderText="Start Date"
-        dateFormat="MMM dd, yyyy"
+        dateFormat={DATE_FORMAT}
         className="custom-input"
+        calendarClassName='custom-calendar'
+        popperPlacement="bottom"
       />
       <DatePicker
         selected={endDate}
@@ -45,9 +46,10 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         endDate={endDate}
         minDate={startDate}
         placeholderText="End Date"
-        dateFormat="MMM dd, yyyy"
+        dateFormat={DATE_FORMAT}
         className="custom-input"
         calendarClassName="custom-calendar"
+        popperPlacement="bottom"
       />
     </div>
   );

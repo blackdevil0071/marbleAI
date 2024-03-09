@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
-import { CrudFilter, useList } from "@refinedev/core";
+import React, { useMemo, useState, useEffect } from "react";
 import dayjs from "dayjs";
+import { CrudFilter, useList } from "@refinedev/core";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
 import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChart";
@@ -14,14 +14,27 @@ export const Dashboard: React.FC = () => {
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
 
+  useEffect(() => {
+    // Set the initial date range and trigger the corresponding filters
+    const [startDate, endDate] = calculateDateRange(7);
+    setSelectedStartDate(startDate);
+    setSelectedEndDate(endDate);
+  }, []);
+
   const handleTimeFrameChange = (newTimeFrame: "7days" | "14days") => {
     setSelectedTimeFrame(newTimeFrame);
-    console.warn("Button Clicked");
   };
 
   const handleDateRangeChange = (startDate: Date, endDate: Date) => {
     setSelectedStartDate(startDate);
     setSelectedEndDate(endDate);
+  };
+
+  const calculateDateRange = (days: number): [Date, Date] => {
+    const endDate = new Date();
+    const startDate = new Date(endDate);
+    startDate.setDate(endDate.getDate() - days);
+    return [startDate, endDate];
   };
 
   const getDailyFilters = (days: number, startDate?: Date | null, endDate?: Date | null): CrudFilter[] => [
@@ -44,10 +57,6 @@ export const Dashboard: React.FC = () => {
     });
   };
 
-  const { data: dailyRevenue } = useDailyData("dailyRevenue");
-  const { data: dailyOrders } = useDailyData("dailyOrders");
-  const { data: newCustomers } = useDailyData("newCustomers");
-
   const useMemoizedChartData = (data: any) => {
     return useMemo(() => {
       return data?.data?.data?.map((item: IChartDatum) => ({
@@ -60,6 +69,10 @@ export const Dashboard: React.FC = () => {
       }));
     }, [data]);
   };
+
+  const { data: dailyRevenue } = useDailyData("dailyRevenue");
+  const { data: dailyOrders } = useDailyData("dailyOrders");
+  const { data: newCustomers } = useDailyData("newCustomers");
 
   const memoizedRevenueData: IChartDatum[] = useMemoizedChartData(dailyRevenue);
   const memoizedOrdersData: IChartDatum[] = useMemoizedChartData(dailyOrders);

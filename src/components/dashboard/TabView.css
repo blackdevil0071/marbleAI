@@ -3,13 +3,46 @@
   display: flex;
   justify-content: flex-end;
 }
+
 button {
- padding: 5px 30px;
+  position: relative; /* Add this to position the dot relative to the button */
+  padding: 5px 30px;
   font-size: 14px;
   color: #969393;
   cursor: pointer;
   outline: none;
   background-color: transparent;
+}
+
+/* Add this style to create a blue dot inside the active button */
+button.active {
+  background-color: #f8f9fa; /* Blue color for the active button */
+  color:#969393; /* White text color for better visibility */
+}
+
+button.active::before {
+  content: "";
+  position: absolute;
+  top: 50%; /* Adjust the position of the line vertically */
+  left: 5px; /* Adjust the position of the line horizontally */
+  width: 20px; /* Adjust the width of the line as needed */
+  height: 2px; /* Adjust the thickness of the line as needed */
+  background-color: #43a1cc; /* Color for the line */
+  transform: translateY(-50%); /* Center the line vertically */
+}
+
+
+button:hover {
+  background-color: #eeeaea;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.date-selector-container{
+  display: flex;
+  flex-direction: row;
 }
 
 .custom-input {
@@ -23,19 +56,4 @@ button {
   font-size: 14px;
   color: #969393;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.custom-calendar {
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  font-size: 14px;
-  border: none;
-  z-index: 999;
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 100%;
-  max-width: 250px;
 }
