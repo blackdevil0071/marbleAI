@@ -41,6 +41,7 @@ Assumptions:
 The react-datepicker library is assumed to be installed and properly configured.
 Style classes such as buttons, custom-input and custom-calendar etc..  are assumed to be defined in an external stylesheet.
 
+![Screenshot (4)](https://github.com/blackdevil0071/refineUI/assets/76084841/da85c2e6-d8ad-4238-bf0c-927cd53382e4)
 
 3.DashBoard
 
