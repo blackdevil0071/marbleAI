@@ -1,69 +1,66 @@
-<div align="center" style="margin: 30px;">
+Approach Documentation of DashBoard, TabView and DateSelector components
 
-![Cover Image](https://refine.ams3.cdn.digitaloceanspaces.com/blog/2023-09-06-daisy-ui-panel/daisyui.jpg "Cover Image")
+TabView
 
-
-<br />
-<br />
-
-<div align="center">
-    <a href="https://refine.dev">Home Page</a> |
-    <a href="https://discord.gg/refine">Discord</a> |
-    <a href="https://refine.dev/examples/">Examples</a> | 
-    <a href="https://refine.dev/blog/">Blog</a> | 
-    <a href="https://refine.dev/docs/">Documentation</a>
-</div>
-</div>
-
-<br />
-
-<div align="center"><strong>Build your <a href="https://reactjs.org/">React</a>-based CRUD applications, without constraints.</strong><br>An open source, headless web application framework developed with flexibility in mind.
-
-<br />
-<br />
-
-[![Discord](https://img.shields.io/discord/837692625737613362.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/refine)
-[![Twitter Follow](https://img.shields.io/twitter/follow/refine_dev?style=social)](https://twitter.com/refine_dev)
-
-<a href="https://www.producthunt.com/posts/refine-3?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-refine&#0045;3" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=362220&theme=light&period=daily" alt="refine - 100&#0037;&#0032;open&#0032;source&#0032;React&#0032;framework&#0032;to&#0032;build&#0032;web&#0032;apps&#0032;3x&#0032;faster | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-
-</div>
+The [TabView] component is a React functional component used in the context of a dashboard to display multiple tabs, each containing different charts. It allows users to switch between tabs and change the time frame for data visualisation.
+Implementation:
+Tab Structure:
+The component uses a [TabItem] component to represent each tab in the dashboard.
+The [TabPanel] component is used to display the content corresponding to the active tab.
+State Management:
+The component manages state using the [useState] hooks for different states.
+Date Range Calculation:
+The [calculateDateRange] function is used to determine the start and end dates based on the selected time frame (7 or 14 days).
+Button Click Handling:
+The [handleButtonClick] function is triggered when the user clicks on a time frame button. It calculates the new date range, updates the time frame and updates the charts.
+The useEffect hook is used to reset the disabled buttons when the selected time frame changes.
+Rendering:
+The component renders a container div for the entire dashboard with tabs, a date selector, and chart panels..
+Styling:
+CSS classes are used to style the buttons, date selector container, and overall layout.
+Media queries are implemented to adjust the layout for larger screen
+Assumptions:
+The component assumes the existence of all the components.
+The DateSelctor component is assumed to handle date range selection.
 
 
-## About
+DateSelector
 
-This example provides a great starting point to learn how to build a full-fledged admin panel by integrating [**daisyUI**](https://daisyui.com) with [**refine**](https://github.com/refinedev/refine)
+The [DateSelector] component is a React functional component responsible for rendering a date picker for selecting start and end dates. It communicates with the parent component by updating the charts when the date range changes.
+Implementation:
+The component uses the [useState] hook to manage the selected start and end dates.
+Date Change Handling:
+The [handleDateChange] function is called when the user selects start or end dates. It updates the state and triggers the charts with the adjusted start and end dates.
+Rendering
+The component renders a div container for the date picker using the reactDatePicker library.
+Two date pickers are used, one for the start date and one for the end date.
+Styling:
+CSS classes are applied for styling.
+Assumptions:
 
-**daisyUI** is a TailwinCSS based component templates library. It provides shorter, semantic class names composed from regular TailwindCSS classes that also come with responsive, color, size and shape variants. As such, daisyUI offers the convenience of using friendly class names to style markups while beautifying React code. On top of these, daisyUI classes can be overridden and extented. Besides, it lets us use regular TailwindCSS classes as well. In this example, you'll discover how to use daisyUI templates to style React components.
+The react-datepicker library is assumed to be installed and properly configured.
+Style classes such as buttons, custom-input and custom-calendar etc..  are assumed to be defined in an external stylesheet.
 
-refine is a React-based powerful framework for building low-code applications. It is primarily focused on implementing data-heavy apps such as internal tools, dashboards, admin panels, and storefronts. It comes with a core package that segregates app concerns like data handling, authentication, access control, etc., into React contexts. It also supports integration with industry standard backend systems such and UI frameworks. It is highly customizable and extensible. In this example, you get an opportunity to learn how to integrate **daisyUI** with **refine** for building an admin panel app.
 
-Refer to the complete tutorial of this app [here.](https://refine.dev/blog/daisy-ui-react-admin-panel/)
+3.DashBoard
 
-## Quick Start
+The [DashBoard] component is a React functional component representing the main dashboard layout. It includes charts for daily revenue, daily orders, new customers, statistics, and recent sales.
+Implementation:
+State Management:
+The component uses the [useState] hook to manage the selected time frame and selected start and end dates.:
+The [useEffect] hook is used to set the initial date range when the component mounts.
+Date Range Calculation:
+The [calculateDateRange] function is used to determine the start and end dates based on the selected time frame.
+Data Fetching:
+The component fetches daily revenue, daily orders, and new customers data using the [useList] hook from the refine core library.
 
-Run the following command to download the project:
 
-```
-npm create refine-app@latest -- --example blog-refine-daisyui
-```
+This Chart Data Memoization function is used to memoize chart data transformations for better performance.
+Rendering:
+The component renders a [TabView] component for charts, and a [RecentSales] component.
 
-Once the setup is complete, navigate to the project folder and start your project with:
+Assumptions:
 
-```
-npm run dev
-```
 
-Your application will be accessible at http://localhost:5173
-
-![Dashboard Page](https://refine.ams3.cdn.digitaloceanspaces.com/blog/2023-09-06-daisy-ui-panel/dash-1.png "Dashboard Page")
-
-![Product List Page](https://refine.ams3.cdn.digitaloceanspaces.com/blog/2023-09-06-daisy-ui-panel/dash-2.png "Product List Page")
-
-![Product Edit Page](https://refine.ams3.cdn.digitaloceanspaces.com/blog/2023-09-06-daisy-ui-panel/dash-3.png "Product Edit Page")
-
-### Resources
-
-Refer to [daisyUI docs](https://daisyui.com/docs/install/) for more information.
-
-Refer to complete CRUD app [tutorial](https://refine.dev/docs/tutorial/introduction/index/) to learn more about refine.
+The [ResponsiveAreaChart, ResponsiveBarChart,TabView and RecentSales], components are assumed to be correctly implemented and available.
+Styling classes are assumed to be defined in an external stylesheets.
