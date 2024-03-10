@@ -1,7 +1,4 @@
 Approach Documentation of DashBoard, TabView and DateSelector components
-![Screenshot (21)](https://github.com/blackdevil0071/refineUI/assets/76084841/621e7774-c0fa-447d-9ab4-56b64240d5e9)
-![Screenshot (22)](https://github.com/blackdevil0071/refineUI/assets/76084841/e2e77cfa-239f-4265-a8d2-2827dc2af2ad)
-![Screenshot (23)](https://github.com/blackdevil0071/refineUI/assets/76084841/066cf388-bf43-4b62-8044-93f7306671b0)
 
 
 TabView
