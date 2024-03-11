@@ -5,16 +5,12 @@ import { TTab } from "../../interfaces";
 import "./TabView.css";
 import DateSelector from "./DateSelector";
 
-const BUTTON_7_DAYS_TEXT = "Mar 2, 2024 - Mar 9, 2024";
-const BUTTON_14_DAYS_TEXT = "Feb 24, 2024 - Mar 9, 2024";
-
 type TTabViewProps = {
   tabs: TTab[];
   handleTimeFrameChange: (newTimeFrame: "7days" | "14days") => void;
   selectedTimeFrame: "7days" | "14days";
   onDateRangeChange: (startDate: Date, endDate: Date) => void;
 };
-
 export const TabView: React.FC<TTabViewProps> = ({
   tabs,
   handleTimeFrameChange,
@@ -27,10 +23,14 @@ export const TabView: React.FC<TTabViewProps> = ({
 
   const calculateDateRange = (days: number): [Date, Date] => {
     const endDate = new Date();
+    endDate.setHours(0, 0, 0, 0); // Set to the beginning of the day
+  
     const startDate = new Date(endDate);
     startDate.setDate(endDate.getDate() - days);
+  
     return [startDate, endDate];
   };
+  
 
   const handleButtonClick = (timeFrame: "7days" | "14days", days: number) => {
     const [startDate, endDate] = calculateDateRange(days);
@@ -76,7 +76,7 @@ export const TabView: React.FC<TTabViewProps> = ({
           onClick={() => handleButtonClick("7days", 7)}
           disabled={disabledButtons === "7days"}
         >
-          {BUTTON_7_DAYS_TEXT}
+          Last 7 days
         </button>
 
         <button
@@ -84,7 +84,7 @@ export const TabView: React.FC<TTabViewProps> = ({
           onClick={() => handleButtonClick("14days", 14)}
           disabled={disabledButtons === "14days"}
         >
-          {BUTTON_14_DAYS_TEXT}
+          Last 14 days
         </button>
       </div>
     </div>

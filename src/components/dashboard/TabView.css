@@ -12,6 +12,9 @@ button {
   cursor: pointer;
   outline: none;
   background-color: transparent;
+  border: 1px solid rgb(180, 177, 177);
+  border-radius: 10px;
+  margin-left: 2px;
 }
 
 /* Add this style to create a blue dot inside the active button */
@@ -33,17 +36,26 @@ button.active::before {
 
 
 button:hover {
-  background-color: #eeeaea;
+  background-color: #cec9c9;
 }
 
 button:disabled {
   cursor: not-allowed;
 }
 
-.date-selector-container{
+.date-selector-container {
   display: flex;
   flex-direction: row;
+  margin-left: 5px;
 }
+
+@media screen and (min-width: 768px) {
+  /* Adjust margin for screens larger than 768px */
+  .date-selector-container {
+    margin-left: 500px;
+  }
+}
+
 
 .custom-input {
   width: 100%;
