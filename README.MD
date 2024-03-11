@@ -14,6 +14,7 @@ Run the following command to download the project:
 
 ``` npm run dev ```
 
+Your application will be accessible at *http://localhost:5173*
 
 
 ![Screenshot (26)](https://github.com/blackdevil0071/refineUI/assets/76084841/b8c74c70-72c8-45e5-a108-a1d139ae7891)
