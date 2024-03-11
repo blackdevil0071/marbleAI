@@ -4,6 +4,8 @@ Approach Documentation of DashBoard, TabView and DateSelector components
 
 QUICK START
 
+```bash
+git clone https://github.com/blackdevil0071/marbleAI.git
 Run the following command to download the project:
 
 ``` git clone https://github.com/blackdevil0071/marbleAI.git ```
