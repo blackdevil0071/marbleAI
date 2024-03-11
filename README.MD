@@ -27,23 +27,30 @@ Styling classes are assumed to be defined in an external stylesheets.
 2.TabView
 
 The [TabView] component is a React functional component used in the context of a dashboard to display multiple tabs, each containing different charts. It allows users to switch between tabs and change the time frame for data visualisation.
+   
 Implementation:
 
 Tab Structure:
 The component uses a [TabItem] component to represent each tab in the dashboard.
 The [TabPanel] component is used to display the content corresponding to the active tab.
+
 State Management:
 The component manages state using the [useState] hooks for different states.
+
 Date Range Calculation:
 The [calculateDateRange] function is used to determine the start and end dates based on the selected time frame (7 or 14 days).
+
 Button Click Handling:
 The [handleButtonClick] function is triggered when the user clicks on a time frame button. It calculates the new date range, updates the time frame and updates the charts.
 The useEffect hook is used to reset the disabled buttons when the selected time frame changes.
+
 Rendering:
 The component renders a container div for the entire dashboard with tabs, a date selector, and chart panels..
+
 Styling:
 CSS classes are used to style the buttons, date selector container, and overall layout.
 Media queries are implemented to adjust the layout for larger screen
+
 Assumptions:
 The component assumes the existence of all the components.
 The DateSelctor component is assumed to handle date range selection.
