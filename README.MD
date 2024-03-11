@@ -6,13 +6,13 @@ QUICK START
 
 Run the following command to download the project:
 
-``` git clone https://github.com/blackdevil0071/marbleAI.git ```
+``` git clone https://github.com/blackdevil0071/marbleAI.git 
 
-``` cd marbleAI ```
+cd marbleAI
 
-``` npm install ```
+npm install
 
-``` npm run dev ```
+npm run dev ```
 
 Your application will be accessible at *http://localhost:5173*
 
