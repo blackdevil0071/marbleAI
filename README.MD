@@ -1,5 +1,9 @@
-```Approach Documentation of DashBoard, TabView and DateSelector components
+Approach Documentation of DashBoard, TabView and DateSelector components
+
 QUICK START
+Run the following command to download the project:
+``` ```
+
 
 ```Note : All the charts dynamically update based on the selected time frames and date range picked by the user and also updating the DashBoard.```
 
