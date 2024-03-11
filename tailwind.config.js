@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import React from 'react';
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   daisyui: {
@@ -20,3 +21,6 @@ export default {
   },
   plugins: [require("daisyui")],
 };
+
+
+//COMPLETE
