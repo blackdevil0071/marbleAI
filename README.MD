@@ -1,7 +1,7 @@
 Approach Documentation of DashBoard, TabView and DateSelector components
-![Screenshot (26)](https://github.com/blackdevil0071/refineUI/assets/76084841/b8c74c70-72c8-45e5-a108-a1d139ae7891)
-![Screenshot (26) (1)](https://github.com/blackdevil0071/refineUI/assets/76084841/9e1f0401-7b26-46d1-a485-fe554babe6e4)
+Note : All the charts dynamically update based on the selected time frames and date range picked by the user and also updating the DashBoard.
 
+![Screenshot (26)](https://github.com/blackdevil0071/refineUI/assets/76084841/b8c74c70-72c8-45e5-a108-a1d139ae7891)
 
 1.DashBoard
 The [DashBoard] component is a React functional component representing the main dashboard layout. It includes charts for daily revenue, daily orders, new customers, statistics, and recent sales.
