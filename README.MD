@@ -1,15 +1,20 @@
 Approach Documentation of DashBoard, TabView and DateSelector components
 
+```Note : All the charts dynamically update based on the selected time frames and date range picked by the user and also updating the DashBoard.```
+
 QUICK START
 
 Run the following command to download the project:
+
 ``` git clone https://github.com/blackdevil0071/marbleAI.git ```
+
 ``` cd marbleAI ```
+
 ``` npm install ```
+
 ``` npm run dev ```
 
 
-```Note : All the charts dynamically update based on the selected time frames and date range picked by the user and also updating the DashBoard.```
 
 ![Screenshot (26)](https://github.com/blackdevil0071/refineUI/assets/76084841/b8c74c70-72c8-45e5-a108-a1d139ae7891)
 
