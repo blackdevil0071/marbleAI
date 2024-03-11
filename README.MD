@@ -1,8 +1,5 @@
 Approach Documentation of DashBoard, TabView and DateSelector components
 
-![Daily Orders](https://github.com/blackdevil0071/refineUI/assets/76084841/5ee94440-9e35-4dae-9da7-508903bd11fd)
-![New Customers](https://github.com/blackdevil0071/refineUI/assets/76084841/c8c4f083-7709-461b-9f5b-389a54a348f5)
-![Daily Revenue](https://github.com/blackdevil0071/refineUI/assets/76084841/0e24123c-aff8-4b8d-929d-83553affdc3b)
 
 1.DashBoard
 The [DashBoard] component is a React functional component representing the main dashboard layout. It includes charts for daily revenue, daily orders, new customers, statistics, and recent sales.
@@ -30,7 +27,8 @@ Styling classes are assumed to be defined in an external stylesheets.
 
 2.TabView
 
-
+![Daily Orders](https://github.com/blackdevil0071/refineUI/assets/76084841/5ee94440-9e35-4dae-9da7-508903bd11fd)
+![Daily Revenue](https://github.com/blackdevil0071/refineUI/assets/76084841/0e24123c-aff8-4b8d-929d-83553affdc3b)
 The [TabView] component is a React functional component used in the context of a dashboard to display multiple tabs, each containing different charts. It allows users to switch between tabs and change the time frame for data visualisation.
    
 Implementation:
@@ -62,6 +60,7 @@ The DateSelctor component is assumed to handle date range selection.
 
 
 3.DateSelector
+![New Customers](https://github.com/blackdevil0071/refineUI/assets/76084841/c8c4f083-7709-461b-9f5b-389a54a348f5)
 
 The [DateSelector] component is a React functional component responsible for rendering a date picker for selecting start and end dates. It communicates with the parent component by updating the charts when 
 the date range changes.
